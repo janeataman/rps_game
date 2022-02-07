@@ -1,0 +1,205 @@
+* {
+    box-sizing: border-box;
+}
+
+/* stop page from scrolling */
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Rubik', sans-serif;
+    background-color: #373737;
+}
+
+main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 960px;
+    height: 650px;
+    overflow: hidden;
+}
+
+section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: url("bg.svg");
+    background-repeat: no-repeat;
+}
+
+img,
+input {
+    position: absolute;
+}
+
+/* unclickable */
+
+#header {
+    width: 350px;
+    height: auto;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#playerHeader {
+    width: 250px;
+    height: auto;
+    top: 190px;
+    left: 78px;
+}
+
+#oppHeader {
+    width: 250px;
+    height: auto;
+    top: 190px;
+    right: 78px;
+}
+
+#playerMain {
+    width: 300px;
+    height: auto;
+    bottom: 180px;
+    left: 70px;
+}
+
+#oppMain {
+    width: 300px;
+    height: auto;
+    bottom: 180px;
+    right: 70px;
+}
+
+#cycle {
+    top: 20px;
+    left: 40px;
+    width: 225px;
+    height: auto;
+}
+
+#show {
+    position: absolute;
+    width: 500px;
+    height: 50px;
+    top: 235px;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 18pt;
+    color: #373737;
+    text-align: center;
+    font-weight: bolder;
+    cursor: default;
+}
+
+#imgComputer,
+#imgHuman {
+    width: 150px;
+    height: auto;
+    top: 294px;
+    right: 140px;
+}
+
+#imgHuman {
+    top: 294px;
+    left: 140px;
+}
+
+#inpHuman,
+#inpComputer,
+#inpDraw {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    font-size: 20pt;
+    color: #373737;
+    border: solid 5px #373737;
+    text-align: center;
+    border-radius: 20%;
+    top: 20px;
+    right: 60px;
+}
+
+#inpComputer {
+    top: 80px;
+    right: 60px;
+}
+
+#inpDraw {
+    top: 140px;
+    right: 60px;
+}
+
+#labelHuman,
+#labelComputer,
+#labelDraw {
+    position: absolute;
+    font-size: 20pt;
+    color: #373737;
+    text-align: left;
+    top: 27px;
+    right: 130px;
+}
+
+#labelComputer {
+    top: 87px;
+    right: 130px;
+}
+
+#labelDraw {
+    top: 147px;
+    right: 130px;
+}
+
+/* choice clickables */
+
+#fireBox,
+#waterBox,
+#grassBox {
+    bottom: 30px;
+    width: 125px;
+    height: auto;
+}
+
+#fireBox {
+    left: 220px;
+}
+
+#grassBox {
+    left: 420px;
+}
+
+#waterBox {
+    right: 220px;
+}
+
+#btnNewGame {
+    top: 150px;
+    left: 72px;
+    width: 160px;
+    height: auto;
+}
+
+/* exit */
+
+#exit {
+    width: 25px;
+    height: auto;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+#fireBox:hover,
+#waterBox:hover,
+#grassBox:hover,
+#btnNewGame:hover,
+#exit:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}

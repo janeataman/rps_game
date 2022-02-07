@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Pokemon Themed Rock, Paper, Scissors</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Jane Ataman">
+    <meta name="description" content="A rock paper sissors game using pokemon's fire water grass attack style.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="./img/project_1.png"/>
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <main>
+        <section id="screen">
+            <!-- unclickable -->
+            <img id="header" src="img/header.png" alt="title">
+            <img id="cycle" src="img/cycle.png" alt="cycle">
+            <img id="playerHeader" src="img/playercard.png" alt="player">
+            <img id="oppHeader" src="img/opponentcard.png" alt="opponent">
+            <img id="playerMain" src="img/playerfield.png" alt="player's field">
+            <img id="oppMain" src="img/enemyfield.png" alt="opponent's field">
+            <!-- player and computer images -->
+            <img id="imgHuman" v-bind:src="humGameImg" alt="player's pokemon choice" />
+            <img id="imgComputer" v-bind:src="compGameImg" alt="opponent's pokemon choice" />
+            <!-- input -->
+            <input id="inpHuman" v-model:src="humanAddNum" value="0" disabled />
+            <input id="inpComputer" v-model:src="computerAddNum" value="0" disabled />
+            <input id="inpDraw" v-model:src="drawAddNum" value="0" disabled />
+            <!-- label -->
+            <label id="labelHuman">Human</label>
+            <label id="labelComputer">Computer</label>
+            <label id="labelDraw">Draw</label>
+            <!-- text -->
+            <p id="show">{{showResult}}</p>
+
+            <!-- clickable -->
+            <!-- choice buttons -->
+            <img id="fireBox" src="img/boxfire01.png" alt="Fire Choice" v-on:click="pickFire()">
+            <img id="waterBox" src="img/boxwater01.png" alt="Water Choice" v-on:click="pickWater()">
+            <img id="grassBox" src="img/boxgrass01.png" alt="Grass Choice" v-on:click="pickGrass()">
+            <!-- new game -->
+            <img id="btnNewGame" src="img/newgame.png" alt="New Game" v-on:click="startGame()">
+        </section>
+    </main>
+
+    <!-- js -->
+    <script src="js/vue.min.js"></script>
+    <script>
+        window.onload = (function () {
+            "use strict";
+
+            // choice
+            let clickChoice = new Vue(
+
+                {
+                    el: '#screen',
+
+                    data: {
+
+                        // array for computer
+                        compRandom: ["img/enemyfire.gif", "img/enemywater.gif", "img/enemygrass.gif"],
+                        humanChoice: ["img/playerfire.gif", "img/playerwater.gif", "img/playergrass.gif"],
+
+                        // start image
+                        humGameImg: "img/blank.gif",
+                        compGameImg: "img/blank.gif",
+
+                        // restart startGame
+                        startBlank: "img/blank.gif",
+
+                        // input numbers
+                        humanAddNum: 0,
+                        computerAddNum: 0,
+                        drawAddNum: 0,
+
+                        // text result
+                        showResult: ""
+
+                    },
+                    methods: {
+                        // input numbers and images to blank
+                        startGame() {
+                            // restart images
+                            this.humGameImg = this.startBlank;
+                            this.compGameImg = this.startBlank;
+                            this.showResult = "";
+                            // restart inputs
+                            this.humanAddNum = 0;
+                            this.computerAddNum = 0;
+                            this.drawAddNum = 0;
+                        },
+
+                        // click handler on the FIRE button
+                        pickFire() {
+
+                            this.humGameImg = this.humanChoice[0];
+                            this.computerRandom();
+                            this.outcomeFire();
+
+                        },
+
+                        // click handler on the WATER button
+                        pickWater() {
+
+                            this.humGameImg = this.humanChoice[1];
+                            this.computerRandom();
+                            this.outcomeWater();
+                        },
+
+                        // click handler on the GRASS button
+                        pickGrass() {
+
+                            this.humGameImg = this.humanChoice[2];
+
+                            this.computerRandom();
+                            this.outcomeGrass();
+                        },
+
+                        // computer randomizes from compRandom array
+                        computerRandom() {
+                            // randomly update displayed faces 
+                            this.compGameImg = this.compRandom[Math.floor(this.compRandom.length * Math.random())];
+                        },
+
+                        // FIRE outcome
+                        outcomeFire() {
+                            // FIRE
+                            if (this.compGameImg === this.compRandom[0]) {
+                                // draw
+                                this.drawAddNum++
+                                this.showResult = "Fire ties Fire";
+                            } else if (this.compGameImg === this.compRandom[1]) {
+                                // lose
+                                this.computerAddNum++
+                                this.showResult = "Fire is extinguished by Water";
+                            } else if (this.compGameImg === this.compRandom[2]) {
+                                // win
+                                this.humanAddNum++
+                                this.showResult = "Fire burns Grass";
+                            }
+                        },
+
+                        // determine outcome with if statment
+                        // WATER outcome
+                        outcomeWater() {
+                            // WATER
+                            if (this.compGameImg === this.compRandom[0]) {
+                                // win
+                                this.humanAddNum++
+                                this.showResult = "Water extinguishes Fire";
+                            } else if (this.compGameImg === this.compRandom[1]) {
+                                // draw
+                                this.drawAddNum++
+                                this.showResult = "Water ties Water";
+                            } else if (this.compGameImg === this.compRandom[2]) {
+                                // lose
+                                this.computerAddNum++
+                                this.showResult = "Water is absorbed by Grass";
+                            }
+                        },
+
+                        // GRASS outcome
+                        outcomeGrass() {
+                            // GRASS
+                            if (this.compGameImg === this.compRandom[0]) {
+                                // lose
+                                this.computerAddNum++
+                                this.showResult = "Grass is burned by Fire";
+                            } else if (this.compGameImg === this.compRandom[1]) {
+                                // win
+                                this.humanAddNum++
+                                this.showResult = "Grass absorbs Water";
+                            } else if (this.compGameImg === this.compRandom[2]) {
+                                // draw
+                                this.drawAddNum++
+                                this.showResult = "Grass ties Grass";
+                            }
+
+
+                        }
+                    }
+
+                }
+            ); // end of clickChoice
+
+
+        }); // window end
+    </script>
+</body>
+
+</html>
